@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>树形拖拽插件示例</title>
+    <!--树形拖拽插件样式文件-->
+    <link rel="stylesheet" href="plugins/treeDrag/css/jquery.treeDrag.css">
+    <link rel="stylesheet" href="src/assets/css/custom.css">
+    <link rel="stylesheet" href="src/assets/css/prettify.css">
+    <!--JQuery依赖-->
+    <script src="plugins/jquery/1.7.1/jquery.min.js"></script>
+    <script src="plugins/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <!--树形拖拽插件-->
+    <script src="plugins/treeDrag/js/jquery.treeDrag.js"></script>
+    <script src="src/assets/js/prettify.js"></script>
+    <script type="text/javascript">
+        /**
+         * 渲染树形拖拽组件
+         */
+        jQuery(document).ready(function () {
+            // 渲染页面
+            const org = $("#org");
+            org.jOrgChart({
+                chartElement: '#chart',
+                dragAndDrop: true
+            });
+        });
+    </script>
+</head>
+<body onload="prettyPrint();">
+<!--渲染树形拖拽的dom结构-->
+<ul id="org" style="display:none">
+    <li>
+        0
+        <ul>
+            <li id="beer">1</li>
+            <li>1
+                <ul>
+                    <li>1-1</li>
+                    <li>
+                        1-2
+                    </li>
+                </ul>
+            </li>
+            <li class="fruit">1
+                <ul>
+                    <li>1-1
+                        <ul>
+                            <li>1-1-1</li>
+                        </ul>
+                    </li>
+                    <li>1-2
+                        <ul>
+                            <li>1-2-1</li>
+                            <li>1-2-2</li>
+                            <li>1-2-3</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>1</li>
+            <!--收缩状态: collapsed-->
+            <li class="collapsed">1
+                <ul>
+                    <li>1-1</li>
+                    <li>1-2</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<!--渲染树形拖拽的容器-->
+<div id="chart" class="orgChart"></div>
+</body>
+</html>

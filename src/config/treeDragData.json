@@ -1,0 +1,92 @@
+{
+  "describe": "根节点",
+  "id": 0,
+  "value": 0,
+  "children": [
+    {
+      "describe": "叶节点1",
+      "id": 1,
+      "value": "1"
+    },
+    {
+      "describe": "叶节点1",
+      "id": 2,
+      "value": "1",
+      "children": [
+        {
+          "describe": "叶子节点1",
+          "id": 2.1,
+          "value": "1-1"
+        },
+        {
+          "describe": "叶子节点2",
+          "id": 2.2,
+          "value": "1-2"
+        }
+      ]
+    },
+    {
+      "describe": "叶节点1",
+      "id": 3,
+      "value": "1",
+      "children": [
+        {
+          "describe": "叶子节点1",
+          "id": 3.1,
+          "value": "1-1",
+          "children": [
+            {
+              "describe": "叶子节点1",
+              "id": 3.1,
+              "value": "1-1-1"
+            }
+          ]
+        },
+        {
+          "describe": "叶子节点2",
+          "id": 3.2,
+          "value": "1-2",
+          "children": [
+            {
+              "describe": "叶子节点1",
+              "id": 3.2,
+              "value": "1-2-1"
+            },
+            {
+              "describe": "叶子节点1",
+              "id": 3.2,
+              "value": "1-2-2"
+            },
+            {
+              "describe": "叶子节点1",
+              "id": 3.2,
+              "value": "1-2-3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "describe": "叶节点1",
+      "id": 4,
+      "value": "1"
+    },
+    {
+      "describe": "叶节点1",
+      "id": 5,
+      "value": "1",
+      "children": [
+        {
+          "describe": "叶子节点1",
+          "id": 5.2,
+          "value": "1-1"
+        },
+        {
+          "describe": "叶子节点1",
+          "id": 5.2,
+          "value": "1-2"
+        }
+      ]
+    }
+  ]
+}
