@@ -18,35 +18,6 @@
          * 渲染树形拖拽组件
          */
         jQuery(document).ready(function () {
-            $.ajax({
-                url:"src/config/treeDragData.json",
-                type:"GET",
-                dataType:"JSON",
-                success:(res)=>{
-                    console.log(generateDOM(res));
-                }
-            })
-             // 生成dom
-            const generateDOM = function (treeData) {
-                let liPanel = ``;
-                if(treeData.isArray()){
-                    for (let i = 0; i < treeData.length(); i++){
-
-                    }
-                    // 循环获取子元素
-                    if(treeData.hasOwnProperty("children")){
-                        generateDOM(treeData.children);
-                    }else{
-                        // 结尾
-                        liPanel += `</ul></li>`
-                        return liPanel;
-                    }
-                }else{
-                    // 开头
-                    liPanel +=` <li data-id="${treeData.id}" data-describe="${treeData.describe}">${treeData.value}<ul>`
-                }
-            }
-            generateDOM();
             // 渲染页面
             const org = $("#org");
             org.jOrgChart({
