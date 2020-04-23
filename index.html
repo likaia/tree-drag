@@ -13,62 +13,12 @@
     <!--树形拖拽插件-->
     <script src="plugins/treeDrag/js/jquery.treeDrag.js"></script>
     <script src="src/assets/js/prettify.js"></script>
-    <script type="text/javascript">
-        /**
-         * 渲染树形拖拽组件
-         */
-        jQuery(document).ready(function () {
-            // 渲染页面
-            const org = $("#org");
-            org.jOrgChart({
-                chartElement: '#chart',
-                dragAndDrop: true
-            });
-        });
-    </script>
+    <!--JSON转DOM解析器-->
+    <script type="text/javascript" src="plugins/treeDrag/js/JsonToDomParser.js"></script>
+    <!--业务逻辑-->
+    <script type="text/javascript" src="src/assets/js/index.js"></script>
 </head>
 <body onload="prettyPrint();">
-<!--渲染树形拖拽的dom结构-->
-<ul id="org" style="display:none">
-    <li>
-        0
-        <ul>
-            <li id="beer">1</li>
-            <li>1
-                <ul>
-                    <li>1-1</li>
-                    <li>
-                        1-2
-                    </li>
-                </ul>
-            </li>
-            <li class="fruit">1
-                <ul>
-                    <li>1-1
-                        <ul>
-                            <li>1-1-1</li>
-                        </ul>
-                    </li>
-                    <li>1-2
-                        <ul>
-                            <li>1-2-1</li>
-                            <li>1-2-2</li>
-                            <li>1-2-3</li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li>1</li>
-            <!--收缩状态: collapsed-->
-            <li class="collapsed">1
-                <ul>
-                    <li>1-1</li>
-                    <li>1-2</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-</ul>
 <!--渲染树形拖拽的容器-->
 <div id="chart" class="orgChart"></div>
 </body>
