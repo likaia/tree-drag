@@ -33,6 +33,11 @@
     height: 60px;
     z-index: 10;
     margin: 0 2px;
+    text-align: center;
+}
+.jOrgChart .node p{
+    line-height: 55px;
+    font-size: 18px;
 }
 
 

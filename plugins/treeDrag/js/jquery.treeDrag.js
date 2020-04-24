@@ -53,7 +53,7 @@
             // 节点的拖动停止事件处理
             $('div.node').bind("dragstop", function handleDragStop(event, ui) {
 
-                // 删除节点
+                // 删除所有节点
                 $(opts.chartElement).children().remove();
                 /* 插件重载 */
                 $this.jOrgChart(opts);
@@ -62,23 +62,64 @@
             // 删除节点的事件处理
             $('div.node').bind("drop", function handleDropEvent(event, ui) {
 
+                // 目标结点id
                 var targetID = $(this).data("tree-node");
+                // 目标结点li元素
                 var targetLi = $this.find("li").filter(function () {
                     return $(this).data("tree-node") === targetID;
                 });
+                // 目标结点的所有子结点
                 var targetUl = targetLi.children('ul');
-
+                // 被拖动结点id
                 var sourceID = ui.draggable.data("tree-node");
+                // 被拖动结点li元素包含他的子结点
                 var sourceLi = $this.find("li").filter(function () {
                     return $(this).data("tree-node") === sourceID;
                 });
+                // 被拖拽元素所在的ul
                 var sourceUl = sourceLi.parent('ul');
-
+                // 判断目标结点是否有子结点
                 if (targetUl.length > 0) {
-                    targetUl.append(sourceLi);
+                    // 判断当前拖拽的元素是否有子结点
+                    if(sourceLi.children("ul").length===0){
+                        // 无子结点
+                        // 放进包含子结点的被拖动元素
+                        targetUl.append(sourceLi);
+                    }else{
+                        // 有子结点
+                        // 只放进当前被拖动元素
+                        sourceLi = sourceLi.children("p");
+                        // 获取被拖动元素的文本值
+                        const sourceLiHtml = sourceLi.html();
+                        // 当前拖动的元素的文本值存在才处理
+                        if (sourceLiHtml!==null){
+                            // 移除当前被拖放元素
+                            sourceLi.remove();
+                            // 生成li标签将当前被拖动元素文本值放进去，追加至目标元素
+                            targetUl.append(`<li><p>${sourceLiHtml}</p></li>`);
+                        }
+                    }
                 } else {
                     targetLi.append("<ul></ul>");
-                    targetLi.children('ul').append(sourceLi);
+                    // 判断当前拖拽的元素是否有子节点
+                    if(sourceLi.children("ul").length===0){
+                        // 无子结点
+                        // 放进包含子结点的被拖动元素
+                        targetLi.children('ul').append(sourceLi);
+                    }else{
+                        // 有子结点
+                        // 只放进当前被拖动元素
+                        sourceLi = sourceLi.children("p");
+                        // 获取被拖动元素的文本值
+                        const sourceLiHtml = sourceLi.html();
+                        // 当前拖动的元素的文本值存在才处理
+                        if(sourceLiHtml !==null){
+                            // 移除当前被拖放元素
+                            sourceLi.remove();
+                            // 生成li标签将当前被拖动元素文本值放进去，追加至目标元素
+                            targetLi.children('ul').append(`<li><p>${sourceLiHtml}</p></li>`);
+                        }
+                    }
                 }
 
                 //删除所有空UL
