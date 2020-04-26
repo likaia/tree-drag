@@ -1,48 +1,59 @@
 {
   "name":"国家",
   "value":"中国",
+  "id": "1000",
   "children":[
     {
       "name":"省份",
       "value":"广东",
+      "id": "1001",
       "children": [
         {
           "name":"城市",
           "value":"广州",
+          "id": "1002",
           "children":[
             {
               "name":"行政区",
-              "value":"天河区"
+              "value":"天河区",
+              "id": "1003"
             },
             {
               "name":"行政区",
-              "value":"越秀区"
+              "value":"越秀区",
+              "id": "1004"
             },
             {
               "name":"行政区",
-              "value":"海珠区"
+              "value":"海珠区",
+              "id": "1005"
             },
             {
               "name":"行政区",
-              "value": "白云区"
+              "value": "白云区",
+              "id": "1006"
             }
           ]
         },
         {
           "name":"城市",
           "value": "深圳",
+          "id": "1007",
           "children": [
             {
               "name":"行政区",
-              "value": "福田区"
+              "value": "福田区",
+              "id": "1008"
             },
             {
               "name":"行政区",
-              "value": "罗湖区"
+              "value": "罗湖区",
+              "id": "1009"
             },
             {
               "name":"行政区",
-              "value":"南山区"
+              "value":"南山区",
+              "id": "1010"
             }
           ]
         }
@@ -51,48 +62,59 @@
     {
       "name":"省份",
       "value":"陕西",
+      "id": "1011",
       "children": [
         {
           "name":"城市",
           "value": "西安",
+          "id": "1012",
           "children": [
             {
               "name":"行政区",
-              "value": "莲湖区"
+              "value": "莲湖区",
+              "id": "1013"
             },
             {
               "name":"行政区",
-              "value": "雁塔区"
+              "value": "雁塔区",
+              "id": "1014"
             },
             {
               "name":"行政区",
-              "value": "未央区"
+              "value": "未央区",
+              "id": "1015"
             },
             {
               "name": "行政区",
-              "value":"新城区"
+              "value":"新城区",
+              "id": "1016"
             }
           ]
         },
         {
           "name":"城市",
           "value": "商洛",
+          "id": "1017",
           "children": [
             {
               "name": "行政区",
-              "value": "洛南"
+              "value": "洛南",
+              "id": "1018"
             },
             {
               "name":"行政区",
-              "value": "丹凤"
+              "value": "丹凤",
+              "id": "1019"
             },
             {
               "name": "行政区",
-              "value": "柞水"
+              "value": "柞水",
+              "id": "1020"
             },
             {
               "name": "行政区",
-              "value":"镇安"
+              "value":"镇安",
+              "id": "1021"
             }
           ]
         }

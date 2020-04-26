@@ -10,9 +10,9 @@ function JsonToDomParser(data, tabSize = 0) {
     }
     return data.reduce((result, item) => {
         if (item.children) {
-            return `${result}${genTab(tabSize)}<li><p>${item.value}</p>\n${genTab(tabSize)}<ul>\n${JsonToDomParser(item.children, tabSize + 1)}${genTab(tabSize)}</ul>\n${genTab(tabSize)}</li>\n`
+            return `${result}${genTab(tabSize)}<li data-id="${item.id}"><p>${item.value}</p>\n${genTab(tabSize)}<ul>\n${JsonToDomParser(item.children, tabSize + 1)}${genTab(tabSize)}</ul>\n${genTab(tabSize)}</li>\n`
         }
-        return `${result}\t${genTab(tabSize)}<li><p>${item.value}</p></li>\n`
+        return `${result}\t${genTab(tabSize)}<li data-id="${item.id}"><p>${item.value}</p></li>\n`
     }, '')
 }
 

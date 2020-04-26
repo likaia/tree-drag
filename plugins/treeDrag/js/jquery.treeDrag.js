@@ -78,6 +78,8 @@
                 });
                 // 被拖拽元素所在的ul
                 var sourceUl = sourceLi.parent('ul');
+                // 获取当前拖动li元素的id
+                const thisNodeId = $(sourceLi).attr("data-id");
                 // 判断目标结点是否有子结点
                 if (targetUl.length > 0) {
                     // 判断当前拖拽的元素是否有子结点
@@ -95,8 +97,8 @@
                         if (sourceLiHtml!==null){
                             // 移除当前被拖放元素
                             sourceLi.remove();
-                            // 生成li标签将当前被拖动元素文本值放进去，追加至目标元素
-                            targetUl.append(`<li><p>${sourceLiHtml}</p></li>`);
+                            // 生成li标签(添加当前节点的data-id)将当前被拖动元素文本值放进去，追加至目标元素
+                            targetUl.append(`<li data-id="${thisNodeId}"><p>${sourceLiHtml}</p></li>`);
                         }
                     }
                 } else {
@@ -116,8 +118,8 @@
                         if(sourceLiHtml !==null){
                             // 移除当前被拖放元素
                             sourceLi.remove();
-                            // 生成li标签将当前被拖动元素文本值放进去，追加至目标元素
-                            targetLi.children('ul').append(`<li><p>${sourceLiHtml}</p></li>`);
+                            // 生成li标签(添加当前节点的data-id)将当前被拖动元素文本值放进去，追加至目标元素
+                            targetLi.children('ul').append(`<li  data-id="${thisNodeId}"><p>${sourceLiHtml}</p></li>`);
                         }
                     }
                 }
