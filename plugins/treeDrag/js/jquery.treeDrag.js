@@ -170,6 +170,13 @@
         $nodeDiv = $("<div>").addClass("node")
             .data("tree-node", nodeCount)
             .append($nodeContent);
+        // 判断子结点长度，当前节点添加子元素数量
+        if($childNodes.length > 0){
+            // 获取当前p标签的值
+            const labelVal = $nodeDiv.children("p").html();
+            // 追加当前子元素的长度
+            $nodeDiv.children("p").html(labelVal+`(${$childNodes.length})`);
+        }
 
         // 展开和收缩节点
         if ($childNodes.length > 0) {
