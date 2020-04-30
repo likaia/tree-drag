@@ -2,36 +2,46 @@
     margin: 0;
     padding: 0;
 }
-#treeContainer{
+
+/*可选列表样式*/
+.optionalList{
+    width: 300px;
+    height: 510px;
+    position: fixed;
+    right: 0;
+    bottom:10%;
+}
+.optionalList .title-panel{
     width: 100%;
-    height: 780px;
-    background: black;
-    overflow: auto;
+    height: 50px;
+    background: #6C9DDB;
 }
-
-#treeContainer .line{
-    height: 20px;
-    width: 4px;
-}
-#treeContainer .down {
-    background-color: #fff;
-    margin: 0 auto;
-}
-
-.row-panel{
-    width: 100%;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-}
-
-.row-panel .node-panel{
-    width: 130px;
+.optionalList .title-panel p{
+    width: 90%;
     height: 100%;
+    margin: 0 auto;
+    line-height: 50px;
     font-size: 18px;
-    border-radius: 8px;
+}
+.optionalList .list-panel li{
+    list-style: none;
     background: #fff;
-    text-align: center;
-    line-height: 60px;
-    margin: 0 2px;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    user-select: none;
+}
+.optionalList .list-panel li img{
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+.optionalList .list-panel li p{
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    line-height: 40px;
+    color: black;
+    cursor:pointer;
+    font-size: 16px;
 }

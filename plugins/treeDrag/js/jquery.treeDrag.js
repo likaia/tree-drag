@@ -40,6 +40,37 @@
                 hoverClass: 'drop-hover'
             });
 
+            // 可选列表拖动
+            $( ".optionalList ul li" ).draggable({
+                cursor: 'move',
+                distance: 40,
+                helper: 'clone',
+                opacity: 0.8,
+                revert: 'invalid',
+                revertDuration: 100,
+                snap: 'div.node.expanded',
+                snapMode: 'inner',
+                stack: 'div.node'
+            });
+            // 可选列表停止拖动
+            $( ".optionalList ul li" ).droppable({
+                accept: '.node',
+                activeClass: 'drag-active',
+                hoverClass: 'drop-hover'
+            });
+            // 可选列表拖放开始
+            $( ".optionalList ul li" ).bind("dragstart",function handleDragStart(event, ui){
+                var sourceNode = $(this);
+            });
+            // 可选列表拖放结束
+            $('.optionalList ul li').bind("dragstop", function handleDragStop(event, ui) {
+
+                // 删除所有节点
+                $(opts.chartElement).children().remove();
+                /* 插件重载 */
+                // $this.jOrgChart(opts);
+            });
+
             // 节点的拖动启动事件处理
             $('div.node').bind("dragstart", function handleDragStart(event, ui) {
 
