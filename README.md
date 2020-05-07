@@ -81,8 +81,8 @@
 ```javascript
 // 渲染页面
 const org = $("#org");
-// 调用jOrgChart方法来渲染页面
-org.jOrgChart({
+// 调用treeDrag方法来渲染页面
+org.treeDrag({
     // 渲染后的dom结构id，这里可以为任意名字，注意一定要带#
     chartElement: '#chart',
     // 开启拖拽功能

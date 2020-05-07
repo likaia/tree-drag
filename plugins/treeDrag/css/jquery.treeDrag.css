@@ -1,32 +1,32 @@
-.jOrgChart .line {
+.treeDrag .line {
     height: 20px;
     width: 4px;
 }
 
-.jOrgChart .down {
+.treeDrag .down {
     background-color: black;
     margin: 0px auto;
 }
 
-.jOrgChart .top {
+.treeDrag .top {
     border-top: 3px solid black;
 }
 
-.jOrgChart .left {
+.treeDrag .left {
     border-right: 2px solid black;
 }
 
-.jOrgChart .right {
+.treeDrag .right {
     border-left: 2px solid black;
 }
 
-.jOrgChart td {
+.treeDrag td {
     text-align: center;
     vertical-align: top;
     padding: 0;
 }
 
-.jOrgChart .node {
+.treeDrag .node {
     background-color: #35363B;
     display: inline-block;
     width: 96px;
@@ -35,7 +35,7 @@
     margin: 0 2px;
     text-align: center;
 }
-.jOrgChart .node p{
+.treeDrag .node p{
     line-height: 55px;
     font-size: 18px;
 }

@@ -8,7 +8,7 @@ const renderPage = function(dataTree={},DomNode="#chart",isDrag=true){
     // Dom字符串转Dom对象
     const org = $(JsonToDomParser(dataTree));
     // 渲染页面
-    org.jOrgChart({
+    org.treeDrag({
         chartElement: DomNode,
         dragAndDrop: isDrag
     });
