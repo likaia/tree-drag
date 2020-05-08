@@ -102,12 +102,25 @@
                             targetUl.append(`<li data-id="${thisNodeId}"><p>${sourceLiHtml}</p></li>`);
                         }
                     }
-                } else {
-                    // 判断是否为根节点
-                    if(targetLi.html() === null){
-                       // 根节点添加li
-
+                } else if(targetLi.html() === null){ // 目标节点为根节点
+                    if(sourceLi.children("ul").length===0){
+                        // 无子结点
+                        $this.children("ul").append(sourceLi);
+                    }else{
+                        // 有子结点
+                        // 只放进当前被拖动元素
+                        sourceLi = sourceLi.children("p");
+                        // 获取被拖动元素的文本值
+                        const sourceLiHtml = sourceLi.html();
+                        // 当前拖动的元素的文本值存在才处理
+                        if(sourceLiHtml !==null){
+                            // 移除当前被拖放元素
+                            sourceLi.remove();
+                            // 生成li标签(添加当前节点的data-id)将当前被拖动元素文本值放进去，追加至目标元素
+                            $this.children("ul").append(`<li data-id="${thisNodeId}"><p>${sourceLiHtml}</p></li>`);
+                        }
                     }
+                } else {
                     targetLi.append("<ul></ul>");
                     // 判断当前拖拽的元素是否有子节点
                     if(sourceLi.children("ul").length===0){
@@ -134,9 +147,9 @@
                 if (sourceUl.children().length === 0) {
                     sourceUl.remove();
                 }
-
             });  // 处理删除结点事件
-
+            // 返回操作完以后的dom节点
+            return $this;
         } // 拖和放
     };
 
@@ -281,6 +294,5 @@
         $nodeDiv.children('a').click(function (e) {
             e.stopPropagation();
         });
-    };
-
+    }
 })(jQuery);

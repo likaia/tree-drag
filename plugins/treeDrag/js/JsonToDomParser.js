@@ -26,6 +26,42 @@ function genTab(n) {
 }
 
 /**
+ * DOM转JSON解析器
+ * @param DomTree
+ * @constructor
+ */
+function DomToJsonParser(DomTree) {
+    let jsonTree = {};
+    for (let i = 0; i < DomTree.length; i++){
+        jsonTree.id = DomTree.eq(i).attr("data-id");
+        jsonTree.value = DomTree.eq(i).find(">p").html();
+        jsonTree.children = getChildren(DomTree);
+    }
+    return jsonTree;
+}
+
+/**
+ * 获取子结点dom
+ * @param obj
+ * @returns {[]}
+ */
+function getChildren(obj){
+    let list = [];
+    // 遍历当前li的所有结点
+    obj.find('>ul>li').each(function(){
+        let area = {};
+        area.value = $(this).find('>p').html();
+        area.id = $(this).attr('data-id');
+        if($(this).find('>ul>li').length > 0){
+            // 递归子节点
+            area.children = getChildren($(this));
+        }
+        list.push(area);
+    });
+    return list;
+}
+
+/**
  * Dom字符串转Dom对象
  * @param arg
  * @returns {NodeListOf<ChildNode>}
