@@ -32,7 +32,7 @@ function genTab(n) {
  */
 function DomToJsonParser(DomTree) {
     let jsonTree = {};
-    for (let i = 0; i < DomTree.length; i++){
+    for (let i = 0; i < DomTree.length; i++) {
         jsonTree.id = DomTree.eq(i).attr("data-id");
         jsonTree.value = DomTree.eq(i).find(">p").html();
         jsonTree.children = getChildren(DomTree);
@@ -45,14 +45,14 @@ function DomToJsonParser(DomTree) {
  * @param obj
  * @returns {[]}
  */
-function getChildren(obj){
+function getChildren(obj) {
     let list = [];
     // 遍历当前li的所有结点
-    obj.find('>ul>li').each(function(){
+    obj.find('>ul>li').each(function () {
         let area = {};
         area.value = $(this).find('>p').html();
         area.id = $(this).attr('data-id');
-        if($(this).find('>ul>li').length > 0){
+        if ($(this).find('>ul>li').length > 0) {
             // 递归子节点
             area.children = getChildren($(this));
         }

@@ -86,4 +86,67 @@ jQuery(document).ready(function () {
 });
 ```
 
+### 操作树节点
+在[TreeOperations.js](plugins%2FtreeDrag%2Fjs%2FTreeOperations.js)文件中实现了对树节点的一些操作函数，进一步提升了可玩性。
+
+在要使用插件的html文件里引入下述依赖，调用文件暴露出来的函数即可。
+```html
+    <!--树的相关操作-->
+    <script type="text/javascript" src="plugins/treeDrag/js/TreeOperations.js"></script>
+```
+* `renameTreeNode`，重命名节点名称，接受3个参数
+  * treeData 树结构数据
+  * nodeId 目标节点ID
+  * nodeTitle 修改后的节点名称
+* `insertNode`，插入节点（同级插入或子级插入），接受4个参数
+  * treeData 树结构数据 
+  * treeNode 要插入的节点
+  * nodeId 目标节点ID
+  * isChildNode 是否为子级插入模式，默认为false
+* `delNode`，删除树节点，接受2个参数
+  * treeData 树结构数据
+  * nodeId 目标节点ID
+
+使用示例：
+```html
+    <!--树的相关操作-->
+    <script type="text/javascript" src="plugins/treeDrag/js/TreeOperations.js"></script>
+
+    <!--渲染树形拖拽的容器-->
+    <div id="chart" class="orgChart"></div>
+    <!--生成JSON按钮-->
+    <div class="btn-panel">
+        <button type="button" class="btn" onclick="generateJSON()">
+            <span>生成JSON</span>
+        </button>
+    </div>
+    <script type="text/javascript">
+        // 你的树结构数据源，此处省略
+        const treeData = {}
+        const treeNode = {
+            "name": "行政区",
+            "value": "新开发区",
+            "id": "90199"
+        };
+        // 重命名目标节点值
+        const renameResult = renameTreeNode(treeData, "1003", "新的修改值")
+        console.log("修改节点完成，页面重新渲染", renameResult)
+        treeDom = renderPage(treeData);
+
+        // 向目标节点位置插入子节点
+        const insertResult = insertNode(
+                treeData,
+                treeNode,
+                "1012",
+                false
+        )
+        treeDom = renderPage(treeData);
+        console.log("节点插入完成，重新渲染页面", insertResult)
+
+        // 删除节点
+        const delResult = delNode(treeData, "1021")
+        treeDom = renderPage(treeData);
+        console.log("节点删除完成，重新渲染页面", delResult)
+    </script>
+```
 > 至此，插件的使用介绍就完成了。
