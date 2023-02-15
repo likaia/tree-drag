@@ -149,4 +149,61 @@ jQuery(document).ready(function () {
         console.log("节点删除完成，重新渲染页面", delResult)
     </script>
 ```
+### 事件处理函数
+除了上面谈到的方法外，调用者可能还想在视图上对树节点进行操作，因此本插件提供了相关的回调函数：
+* `clickCallback` 单击回调函数，有1个回调参数：节点ID
+* `rightClickCallback` 右击回调函数，有2个回调参数：
+  * `mouseEvent` 当前鼠标点击对象
+  * `nodeObj` 节点对象数据（包含节点id、节点值）
+
+使用示例：
+```javascript
+/**
+ * 渲染页面
+ * @param dataTree 需要渲染的树形JSON
+ * @param DomNode 接收渲染结果的dom结点
+ * @param isDrag
+ */
+const renderPage = function(dataTree={},DomNode="#chart",isDrag=true){
+    // Dom字符串转Dom对象
+    const org = $(JsonToDomParser(dataTree));
+    // 渲染页面
+    return org.treeDrag({
+        chartElement: DomNode,
+        dragAndDrop: isDrag,
+        clickCallback: nodeClickFn,
+        rightClickCallback: nodeRightClickFn
+    });
+};
+
+const nodeClickFn = (nodeId) =>{
+    console.log("节点点击了",nodeId)
+}
+
+const nodeRightClickFn = (mouseEvent, nodeObj) => {
+    console.log("元素右击",mouseEvent, nodeObj)
+}
+
+let treeData = {};
+let treeDom = {};
+// 生成json数据
+const generateJSON = function(){
+    const jsonTree = new DomToJsonParser(treeDom);
+    console.log(jsonTree);
+    alert("json已生成，请在控制台查看");
+};
+jQuery(document).ready(function () {
+    $.ajax({
+        url:"src/config/treeDragData.json",
+        type:"get",
+        dataType:"JSON",
+        success:(res)=>{
+            treeData = res;
+            // 渲染页面
+            treeDom = renderPage(treeData);
+        }
+    })
+});
+```
+
 > 至此，插件的使用介绍就完成了。

@@ -6,7 +6,7 @@
     $.fn.treeDrag = function (options) {
         var opts = $.extend({}, $.fn.treeDrag.defaults, options);
         var $appendTo = $(opts.chartElement);
-        
+
         // 当前传进来的li对象
         $this = $(this);
         // 声明树形图容器
@@ -84,36 +84,36 @@
                 // 判断目标结点是否有子结点
                 if (targetUl.length > 0) {
                     // 判断当前拖拽的元素是否有子结点
-                    if(sourceLi.children("ul").length===0){
+                    if (sourceLi.children("ul").length === 0) {
                         // 无子结点
                         // 放进包含子结点的被拖动元素
                         targetUl.append(sourceLi);
-                    } else{
+                    } else {
                         // 有子结点
                         // 只放进当前被拖动元素
                         sourceLi = sourceLi.children("p");
                         // 获取被拖动元素的文本值
                         const sourceLiHtml = sourceLi.html();
                         // 当前拖动的元素的文本值存在才处理
-                        if (sourceLiHtml!==null){
+                        if (sourceLiHtml !== null) {
                             // 移除当前被拖放元素
                             sourceLi.remove();
                             // 生成li标签(添加当前节点的data-id)将当前被拖动元素文本值放进去，追加至目标元素
                             targetUl.append(`<li data-id="${thisNodeId}"><p>${sourceLiHtml}</p></li>`);
                         }
                     }
-                } else if(targetLi.html() === null){ // 目标节点为根节点
-                    if(sourceLi.children("ul").length===0){
+                } else if (targetLi.html() === null) { // 目标节点为根节点
+                    if (sourceLi.children("ul").length === 0) {
                         // 无子结点
                         $this.children("ul").append(sourceLi);
-                    }else{
+                    } else {
                         // 有子结点
                         // 只放进当前被拖动元素
                         sourceLi = sourceLi.children("p");
                         // 获取被拖动元素的文本值
                         const sourceLiHtml = sourceLi.html();
                         // 当前拖动的元素的文本值存在才处理
-                        if(sourceLiHtml !==null){
+                        if (sourceLiHtml !== null) {
                             // 移除当前被拖放元素
                             sourceLi.remove();
                             // 生成li标签(添加当前节点的data-id)将当前被拖动元素文本值放进去，追加至目标元素
@@ -123,18 +123,18 @@
                 } else {
                     targetLi.append("<ul></ul>");
                     // 判断当前拖拽的元素是否有子节点
-                    if(sourceLi.children("ul").length===0){
+                    if (sourceLi.children("ul").length === 0) {
                         // 无子结点
                         // 放进包含子结点的被拖动元素
                         targetLi.children('ul').append(sourceLi);
-                    }else{
+                    } else {
                         // 有子结点
                         // 只放进当前被拖动元素
                         sourceLi = sourceLi.children("p");
                         // 获取被拖动元素的文本值
                         const sourceLiHtml = sourceLi.html();
                         // 当前拖动的元素的文本值存在才处理
-                        if(sourceLiHtml !==null){
+                        if (sourceLiHtml !== null) {
                             // 移除当前被拖放元素
                             sourceLi.remove();
                             // 生成li标签(添加当前节点的data-id)将当前被拖动元素文本值放进去，追加至目标元素
@@ -158,7 +158,9 @@
         chartElement: 'body',
         depth: -1,
         chartClass: "treeDrag",
-        dragAndDrop: false
+        dragAndDrop: false,
+        clickCallback: function (nodeId) {},
+        rightClickCallback: function (mouseEvent,nodeObj) {}
     };
 
     // 节点数量
@@ -166,12 +168,16 @@
 
     // 递归构建树
     function buildNode($node, $appendTo, level, opts) {
+        // 获取当前树节点的id
+        const $nodeId = $node.attr("data-id");
         var $table = $("<table cellpadding='0' cellspacing='0' border='0'/>");
         var $tbody = $("<tbody/>");
 
         // 构造节点容器
         var $nodeRow = $("<tr/>").addClass("node-cells");
-        var $nodeCell = $("<td/>").addClass("node-cell").attr("colspan", 2);
+        var $nodeCell = $("<td/>").addClass("node-cell")
+            .attr("colspan", 2)
+            .attr("data-id", $nodeId);
         var $childNodes = $node.children("ul:first").children("li");
         var $nodeDiv;
         if ($childNodes.length > 1) {
@@ -191,12 +197,14 @@
         $nodeDiv = $("<div>").addClass("node")
             .data("tree-node", nodeCount)
             .append($nodeContent);
+        // 获取节点值
+        const $nodeVal = $nodeDiv.children("p").html();
         // 判断子结点长度，当前节点添加子元素数量
-        if($childNodes.length > 0){
+        if ($childNodes.length > 0) {
             // 获取当前p标签的值
             const labelVal = $nodeDiv.children("p").html();
             // 追加当前子元素的长度
-            $nodeDiv.children("p").html(labelVal+`(${$childNodes.length})`);
+            $nodeDiv.children("p").html(labelVal + `(${$childNodes.length})`);
         }
 
         // 展开和收缩节点
@@ -222,6 +230,19 @@
                 }
             });
         }
+
+        // 给所有节点绑定点击事件
+        $nodeDiv.click(function () {
+            // 执行调用者传入的回调函数
+            opts.clickCallback($nodeId)
+        });
+
+        // 给所有节点绑定右击事件
+        $nodeDiv.on("contextmenu", function (e) {
+            // 阻止默认的右击菜单行为
+            e.preventDefault();
+            opts.rightClickCallback(e, {nodeId: $nodeId, nodeValue: $nodeVal})
+        });
 
         $nodeCell.append($nodeDiv);
         $nodeRow.append($nodeCell);

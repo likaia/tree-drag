@@ -12,9 +12,19 @@ const renderPage = function (dataTree = {}, DomNode = "#chart", isDrag = true) {
     // 渲染页面
     return org.treeDrag({
         chartElement: DomNode,
-        dragAndDrop: isDrag
+        dragAndDrop: isDrag,
+        clickCallback: nodeClickFn,
+        rightClickCallback: nodeRightClickFn
     });
 };
+
+const nodeClickFn = (nodeId) =>{
+    console.log("节点点击了",nodeId)
+}
+
+const nodeRightClickFn = (mouseEvent, nodeObj) => {
+    console.log("元素右击", mouseEvent, nodeObj)
+}
 
 let treeData = {};
 let treeDom = {};
