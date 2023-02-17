@@ -130,6 +130,8 @@
                     } else {
                         // 有子结点
                         // 只放进当前被拖动元素
+                        // 修改原始节点的data-id，因为它插入到新节点之后，新节点的id用的原始节点的，会造成冲突（树中的节点应该是唯一的）
+                        $(sourceLi).attr("data-id", new Date().getTime() + "towedAway")
                         sourceLi = sourceLi.children("p");
                         // 获取被拖动元素的文本值
                         const sourceLiHtml = sourceLi.html();
