@@ -72,6 +72,11 @@ jQuery(document).ready(function () {
             const delResult = delNode(treeData, "1021")
             treeDom = renderPage(treeData);
             console.log("节点删除完成，重新渲染页面", delResult)
+
+            console.log("搜索成功",searchNode(treeData,"1002"))
+            traverseTreeNodes(treeData,(val)=>{
+                console.log(val)
+            })
         }
     })
 });

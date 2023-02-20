@@ -110,18 +110,41 @@ function delNode(treeData, nodeId) {
 }
 
 /**
+ * 搜索树节点
+ * @param treeData 树结构数据
+ * @param nodeId 节点id
+ * @returns {*|null}
+ */
+function searchNode(treeData, nodeId) {
+    return searchNodeOfTree(treeData, nodeId)
+}
+
+/**
+ * 遍历树节点
+ * @param treeData 树结构数据
+ * @param callback 回调函数
+ */
+function traverseTreeNodes(treeData, callback = (nodeObj)=>{}) {
+    searchNodeOfTree(treeData, "", callback)
+}
+
+
+/**
  * 深度优先搜索指定树节点
  * @param treeData 树结构数据
  * @param nodeId 目标节点ID
+ * @param callback 遍历到每个节点时的回调函数
  * @returns {*|null}
  */
-const searchNodeOfTree = (treeData, nodeId) => {
+const searchNodeOfTree = (treeData, nodeId, callback = (nodeObj)=>{}) => {
     if (nodeId == null) throw new Error("节点ID不能为空")
     const stack = [treeData];
     while (stack.length !== 0) {
         // 取出栈顶元素
         const stackTop = stack.pop();
         if (stackTop) {
+            // 执行回调函数
+            callback(stackTop)
             // 继续搜索子节点
             if (stackTop.children && stackTop.children.length) {
                 /**
