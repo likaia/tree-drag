@@ -112,6 +112,9 @@ jQuery(document).ready(function () {
 * `traverseTreeNodes` 遍历树节点，接受2个参数
   * treeData 树结构数据
   * callback 事件回调函数，访问树节点时，此回调函数会执行
+* `searchAllParentNode` 搜索树的所有父节点，接受2个参数
+  * treeData 树结构数据
+  * nodeId 目标节点ID
 
 
 使用示例：

@@ -120,6 +120,28 @@ function searchNode(treeData, nodeId) {
 }
 
 /**
+ *  搜索树的所有节点
+ * @param treeData 树结构数据
+ * @param nodeId 目标节点id
+ * @returns {*[]}
+ */
+function searchAllParentNode(treeData,nodeId) {
+    const result = []
+    const recursionFn = (treeData, nodeId) => {
+        // 基线条件：目标节点为根节点
+        if (nodeId === treeData.id) {
+            return result;
+        }
+        const parenNode = findParentNode(treeData,nodeId).parentNode
+        result.push({name:parenNode.name, value:parenNode.value, id:parenNode.id})
+        recursionFn(treeData,parenNode.id)
+    }
+    recursionFn(treeData, nodeId)
+    return result
+}
+
+
+/**
  * 遍历树节点
  * @param treeData 树结构数据
  * @param callback 回调函数
