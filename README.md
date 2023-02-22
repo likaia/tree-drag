@@ -1,8 +1,7 @@
 ## 前言
 基于JQuery+JQueryUI实现的一款树形拖拽插件，效果图如下
 
-![](
-![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/821168dfec1a441db261024112bfd399~tplv-k3u1fbpfcp-watermark.image?))
+![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/821168dfec1a441db261024112bfd399~tplv-k3u1fbpfcp-watermark.image?)
 
 ## 项目目录
 * plugins 插件目录
