@@ -119,22 +119,44 @@ function searchNode(treeData, nodeId) {
     return searchNodeOfTree(treeData, nodeId)
 }
 
+
 /**
- *  搜索树的所有节点
+ * 获取节点的所有直接父节点
+ * @param treeData 树结构数据
+ * @param nodeId 目标节点id
+ * @returns {*|null} 返回含有所有直接父节点的树结构数据
+ */
+function getAllParentsOfANode(treeData, nodeId) {
+    // 搜索目标节点
+    const targetResult = searchNode(treeData, nodeId)
+    // 搜索所有父节点
+    const parents = searchAllParentNode(treeData, nodeId)
+    // 如果选择的是根节点则直接返回树的所有节点数据
+    if (parents.length === 0) {
+        return treeData
+    }
+    // 把目标节点放入它的直接父节点内，它的0号元素一定是它的直接父节点，将搜索结果放入
+    parents[0].children = [targetResult]
+    // 重新构建树
+    return convertToTree(parents)
+}
+
+/**
+ *  搜索树的所有父节点
  * @param treeData 树结构数据
  * @param nodeId 目标节点id
  * @returns {*[]}
  */
-function searchAllParentNode(treeData,nodeId) {
+function searchAllParentNode(treeData, nodeId) {
     const result = []
     const recursionFn = (treeData, nodeId) => {
         // 基线条件：目标节点为根节点
         if (nodeId === treeData.id) {
             return result;
         }
-        const parenNode = findParentNode(treeData,nodeId).parentNode
-        result.push({name:parenNode.name, value:parenNode.value, id:parenNode.id})
-        recursionFn(treeData,parenNode.id)
+        const parenNode = findParentNode(treeData, nodeId).parentNode
+        result.push({name: parenNode.name, value: parenNode.value, id: parenNode.id})
+        recursionFn(treeData, parenNode.id)
     }
     recursionFn(treeData, nodeId)
     return result
@@ -150,6 +172,27 @@ function traverseTreeNodes(treeData, callback = (nodeObj)=>{}) {
     searchNodeOfTree(treeData, "", callback)
 }
 
+/**
+ * 将含有一定规律的数组转为树结构数据
+ * @param arr 数组的规律为：数组的后一项是其前一项的父节点
+ * @returns {*|null}
+ */
+function convertToTree(arr) {
+    if (!arr || arr.length === 0) {
+        return null;
+    }
+    let tree = arr[0]
+    for (let i = 1; i < arr.length; i++) {
+        let node = arr[i]
+        if (!node.children) {
+            node.children = []
+        }
+        node.children.push(tree);
+        tree = node;
+    }
+    return tree;
+}
+
 
 /**
  * 深度优先搜索指定树节点
@@ -158,7 +201,8 @@ function traverseTreeNodes(treeData, callback = (nodeObj)=>{}) {
  * @param callback 遍历到每个节点时的回调函数
  * @returns {*|null}
  */
-const searchNodeOfTree = (treeData, nodeId, callback = (nodeObj)=>{}) => {
+const searchNodeOfTree = (treeData, nodeId, callback = (nodeObj) => {
+}) => {
     if (nodeId == null) throw new Error("节点ID不能为空")
     const stack = [treeData];
     while (stack.length !== 0) {
@@ -303,7 +347,7 @@ const insertFn = (treeData, treeNode, targetNodeId) => {
         return true;
     }
     // 目标为叶节点时，则先构造children再插入新节点
-    targetChildData.children= [treeNode]
+    targetChildData.children = [treeNode]
     return true;
 }
 

@@ -72,8 +72,9 @@ jQuery(document).ready(function () {
             const delResult = delNode(treeData, "1021")
             treeDom = renderPage(treeData);
             console.log("节点删除完成，重新渲染页面", delResult)
-            const result = searchAllParentNode(treeData, "1003")
-            console.log("树的所有父节点", result)
+            // 获取节点的所有直接父节点
+            const parentsTree = getAllParentsOfANode(treeData, "1012")
+            renderPage(parentsTree)
         }
     })
 });

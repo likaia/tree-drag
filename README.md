@@ -115,7 +115,9 @@ jQuery(document).ready(function () {
 * `searchAllParentNode` 搜索树的所有父节点，接受2个参数
   * treeData 树结构数据
   * nodeId 目标节点ID
-
+* `getAllParentsOfANode` 获取目标节点的所有直接父节点，接受2个参数 
+  * treeData 树结构数据
+  * nodeId 目标节点ID
 
 使用示例：
 ```html
