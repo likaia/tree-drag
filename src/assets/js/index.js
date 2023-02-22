@@ -74,7 +74,7 @@ jQuery(document).ready(function () {
             console.log("节点删除完成，重新渲染页面", delResult)
             // 获取节点的所有直接父节点
             const parentsTree = getAllParentsOfANode(treeData, "1012")
-            renderPage(parentsTree)
+            // renderPage(parentsTree)
         }
     })
 });
